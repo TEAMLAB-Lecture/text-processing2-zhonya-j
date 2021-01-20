@@ -20,16 +20,25 @@ def digits_to_words(input_string):
             ex - 'one nine one zero four'
 
         Examples:
-            >>> import text_processing2 as tp2
-            >>> digits_str1 = "Zip Code: 19104"
-            >>> tp2.digits_to_words(digits_str1)
+            import text_processing2 as tp2
+            digits_str1 = "Zip Code: 19104"
+            tp2.digits_to_words(digits_str1)
             'one nine one zero four'
             >>> digits_str2 = "Pi is 3.1415..."
             >>> tp2.digits_to_words(digits_str2)
             'three one four one five'
     """
-    digit_string = None
-    return digit_string
+    if input_string=="":
+        return ""
+    temp=[]
+    for i in input_string:
+        if i.isdigit():
+            temp.append(int(i))
+    my_dict={0:"zero",1:"one",2:"two",3:"three",4:"four",5:"five",6:"six",7:"seven",8:"eight",9:"nine"}
+    digit_string=""
+    for j in temp:
+        digit_string+=my_dict[j]+" "
+    return digit_string[:-1]
 
 
 """
@@ -64,5 +73,22 @@ def to_camel_case(underscore_str):
             >>> tp2.to_camel_case(underscore_str3)
             "alreadyCamel"
     """
-    camelcase_str = None
+    if underscore_str.find("_")==-1: #이미 카멜케이스 이면
+        return underscore_str
+        
+    if underscore_str=="":
+        return ""
+    camelcase_str=""
+    cnt=0
+    for s in underscore_str.title().split("_"):
+        if s!="":
+            if cnt==0:
+                camelcase_str+=s.lower()
+                cnt+=1
+            else:
+                camelcase_str+=s
     return camelcase_str
+
+if __name__ == "__main__":
+    print(digits_to_words("Pi is 3.1415..."))
+    print(to_camel_case("to_camel_case"))
